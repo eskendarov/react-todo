@@ -3,16 +3,18 @@ import TodoList from './TodoList';
 import AddTodoForm from './AddTodoForm';
 
 const App = () => {
-    const [todos, setTodos] = useState([]);
-    const handleAddTodo = (newTodo) => {
-        setTodos([...todos, {id: todos.length + 1, title: newTodo}]);
+    const [todoList, setTodoList] = useState([]);
+
+    const addTodo = (todoTitle) => {
+        const newTodo = {id: Date.now(), title: todoTitle};
+        setTodoList(prevTodos => [...prevTodos, newTodo]);
     };
 
     return (
         <div>
             <h1>Todo List</h1>
-            <TodoList todos={todos}/>
-            <AddTodoForm onAddTodo={handleAddTodo}/>
+            <AddTodoForm onAddTodo={addTodo}/>
+            <TodoList todoList={todoList}/>
         </div>
     );
 };
